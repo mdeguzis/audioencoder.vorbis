@@ -5,9 +5,12 @@ cmake_minimum_required(VERSION 2.8)
 include(ExternalProject)
 externalproject_add(ogg
                     SOURCE_DIR ${CMAKE_SOURCE_DIR}
-                    UPDATE_COMMAND ""
+                    UPDATE_COMMAND autoreconf -vif <SOURCE_DIR>
                     CONFIGURE_COMMAND <SOURCE_DIR>/configure 
                       --prefix=${OUTPUT_DIR}
+                      --enable-static
+                      --disable-shared
+                      "CFLAGS=-fPIC -DPIC -O2"
                     INSTALL_COMMAND ""
                     BUILD_IN_SOURCE 1)
                   
